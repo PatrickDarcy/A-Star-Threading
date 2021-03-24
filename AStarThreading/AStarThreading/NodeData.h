@@ -2,6 +2,7 @@
 #include  <string>
 #include "GraphNode.h"
 #include <map>
+#include <SFML/Graphics.hpp>
 
 // ---------------------------------------------------------------------
 //  Name:           NodeData
@@ -13,6 +14,7 @@
 
 struct NodeData
 {
+	sf::RectangleShape m_cube;
 	int m_type;
 	int m_pathCost;
 	float m_heuristic;

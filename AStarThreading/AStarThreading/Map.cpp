@@ -1,18 +1,15 @@
 #include "Map.h"
 
-Map::Map(int t_mapSize) :
-	nodeMap(t_mapSize)
+Map::Map(int t_mapSize, int t_row, int t_col) :
+	nodeMap(t_mapSize),
+	m_row(t_row),
+	m_col(t_col),
+	m_numOfNodes(t_mapSize)
 {
-	m_mapSprite.setPosition(0, 0);
-	if (!m_mapTexture.loadFromFile("Assets/Images/Map.png"))
-	{
-		std::cout << "error with Map texture";
-	}
-	m_mapSprite.setTexture(m_mapTexture);
 }
 void Map::initMap()
 {
-	for (int i = 0; i < 400; i++)
+	for (int i = 0; i < m_numOfNodes; i++)
 	{
 		if (nodeMap.nodeIndex(i) != NULL)
 		{
@@ -33,9 +30,9 @@ void Map::update()
 
 void Map::setUpArcs()
 {
-	for (int row = 0; row < 20; row++)
+	for (int row = 0; row < m_row; row++)
 	{
-		for (int col = 0; col < 20; col++)
+		for (int col = 0; col < m_col; col++)
 		{
 			for (int direction = 0; direction < 9; direction++)
 			{
@@ -61,7 +58,7 @@ void Map::setUpArcs()
 
 void Map::draw(sf::RenderWindow& t_window)
 {
-	t_window.draw(m_mapSprite);
+	//for(auto node : nodeMap)
 }
 
 GraphNode<NodeData, int>* Map::getNode(sf::Vector2i t_index)

@@ -2,6 +2,8 @@
 #include <iostream>
 #include "ThreadPool.h"
 #include "SFML/Graphics.hpp"
+#include "Map.h"
+#include "NodeData.h"
 
 class Game
 {
@@ -9,6 +11,9 @@ private:
 
 	sf::RenderWindow window;
 	ThreadPool m_thread;
+	Map* map1;
+	Map* map2;
+	Map* map3;
 
 public:
 

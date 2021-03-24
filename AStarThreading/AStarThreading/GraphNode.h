@@ -21,7 +21,10 @@ public:
 	typedef GraphNode<NodeType, ArcType> Node;
 
 	// Constructor function
-	GraphNode( Node * previous = 0 ) : m_previous( previous ) {}
+	GraphNode( Node * previous = 0 ) : m_previous( previous ) 
+	{
+
+	}
 
     // Accessor functions
     std::list<Arc> const & arcList() const 

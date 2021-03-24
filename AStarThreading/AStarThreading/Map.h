@@ -10,16 +10,15 @@ class Map
 {
 private:
 	Graph<NodeData, int> nodeMap;
-	sf::Sprite m_mapSprite;
-	sf::Texture m_mapTexture;
 	NodeData m_nodeData;
 	int from, to, weight;
-	int const ROW = 20;
-	int const COL = 20;
+	int m_row;
+	int m_col;
+	int m_numOfNodes;
 
 public:
 	int m_tileIndex = 0;
-	Map(int t_mapSize);
+	Map(int t_mapSize, int t_row, int t_col);
 	void initMap();
 	void update();
 	void setUpArcs();
@@ -27,4 +26,5 @@ public:
 	void draw(sf::RenderWindow& t_window);
 	GraphNode<NodeData, int>* getNode(sf::Vector2i t_index);
 	Graph<NodeData, int> & getGraph();
+	sf::Vector2i getRowCol() { return sf::Vector2i{ m_row, m_col }; };
 }; 
