@@ -2,18 +2,18 @@
 #include <iostream>
 #include "ThreadPool.h"
 #include "SFML/Graphics.hpp"
-#include "Map.h"
-#include "NodeData.h"
+#include "Grid.h"
+
+const int static SCREEN_WIDTH = 1000;
+const int static SCREEN_HEIGHT = 1000;
 
 class Game
 {
 private:
 
-	sf::RenderWindow window;
+	sf::RenderWindow m_window;
 	ThreadPool m_thread;
-	Map* map1;
-	Map* map2;
-	Map* map3;
+	Grid m_grid;
 
 public:
 

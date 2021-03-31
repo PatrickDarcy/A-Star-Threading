@@ -143,7 +143,8 @@
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="ThreadPool.cpp" />
@@ -151,12 +152,8 @@
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Graph.h" />
-    <ClInclude Include="GraphArc.h" />
-    <ClInclude Include="GraphNode.h" />
-    <ClInclude Include="Map.h" />
-    <ClInclude Include="nodeCostComparer.h" />
-    <ClInclude Include="NodeData.h" />
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ThreadPool.h" />
   </ItemGroup>
