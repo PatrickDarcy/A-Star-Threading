@@ -3,7 +3,7 @@
 Game::Game() :
 	m_window{ sf::VideoMode{SCREEN_WIDTH,SCREEN_HEIGHT,32}, "A Star Threading" }
 {
-	m_grid.setGrid(GridType::Thirty);
+	m_grid.setRectangle(GridType::Thirty);
 }
 
 void Game::run()
@@ -49,12 +49,15 @@ void Game::processGameEvents(sf::Event& t_event)
 			m_window.close();
 			break;
 		case sf::Keyboard::Num1:
+			m_grid.setRectangle(GridType::Thirty);
 			m_grid.setGrid(GridType::Thirty);
 			break;
 		case sf::Keyboard::Num2:
+			m_grid.setRectangle(GridType::Hundred);
 			m_grid.setGrid(GridType::Hundred);
 			break;
 		case sf::Keyboard::Num3:
+			m_grid.setRectangle(GridType::Thousand);
 			m_grid.setGrid(GridType::Thousand);
 			break;
 		default:
@@ -70,8 +73,6 @@ void Game::update(sf::Time t_dt)
 
 void Game::render()
 {
-	m_window.clear();
 	m_grid.draw(m_window);
-	m_window.display();
 }
 
