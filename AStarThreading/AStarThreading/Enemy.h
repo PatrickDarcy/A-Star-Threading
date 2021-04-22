@@ -7,12 +7,14 @@
 class Enemy
 {
 private:
+	sf::RectangleShape m_enemyShape;
 
 public:
-	Enemy();
+	Enemy(float t_enemySize, sf::Vector2i t_enemyPos);
 	void update(double dt);
 	void render(sf::RenderWindow& t_window);
-
+	void setPos(sf::Vector2f t_pos);
+	sf::Vector2f getPos();
 };
 
 

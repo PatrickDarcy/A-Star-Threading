@@ -24,5 +24,6 @@ public:
 	void setGrid(GridType t_gridType);
 	void update();
 	void draw(sf::RenderWindow& t_window);
+	sf::Vector2f getNodeSize();
 };
 

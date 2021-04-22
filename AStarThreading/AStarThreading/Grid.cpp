@@ -89,11 +89,15 @@ void Grid::update()
 
 void Grid::draw(sf::RenderWindow& t_window)
 {
-	t_window.clear();
+
 	for (auto t_node : m_grid)
 	{
 		m_node.setPosition(t_node->m_pos);
 		t_window.draw(m_node);
 	}
-	t_window.display();
+}
+
+sf::Vector2f Grid::getNodeSize()
+{
+	return m_node.getSize();
 }
