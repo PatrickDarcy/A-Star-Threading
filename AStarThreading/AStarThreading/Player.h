@@ -1,5 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
+#include "Node.h"
+#include "Grid.h"
 
 class Player
 {

@@ -17,13 +17,16 @@ private:
 	std::vector<Node*> m_grid;
 	float m_gridDimensions;
 	float m_distNode = 5.5f;
+
 public:
 	Grid();
 	~Grid();
-	void setRectangle(GridType t_gridType);
-	void setGrid(GridType t_gridType);
-	void update();
-	void draw(sf::RenderWindow& t_window);
-	sf::Vector2f getNodeSize();
+	void SetRectangle(GridType t_gridType);
+	void SetGrid(GridType t_gridType);
+	void Update();
+	void Draw(sf::RenderWindow& t_window);
+	float GetGridDimensions();
+	sf::Vector2f GetNodeSize();
+	std::vector<Node*> GetNodes();
 };
 

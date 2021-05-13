@@ -3,7 +3,7 @@
 Game::Game() :
 	m_window{ sf::VideoMode{SCREEN_WIDTH,SCREEN_HEIGHT,32}, "A Star Threading" }
 {
-	m_grid.setRectangle(GridType::Thirty);
+	m_grid.SetRectangle(GridType::Thirty);
 }
 
 void Game::run()
@@ -50,34 +50,34 @@ void Game::processGameEvents(sf::Event& t_event)
 			break;
 		case sf::Keyboard::Num1:
 			m_currentGrid = GridType::Thirty;
-			m_grid.setRectangle(GridType::Thirty);
-			m_grid.setGrid(GridType::Thirty);
+			m_grid.SetRectangle(GridType::Thirty);
+			m_grid.SetGrid(GridType::Thirty);
 			m_enemies.clear();
 			for (int i = 0; i < 5; i++)
 			{
-				m_enemies.push_back(new Enemy(m_grid.getNodeSize().x, getEnemySpawn()));
+				m_enemies.push_back(new Enemy(m_grid.GetNodeSize().x, getEnemySpawn(), &m_grid, &m_player));
 			}
 			getEnemySpawn();
 			break;
 		case sf::Keyboard::Num2:
 			m_currentGrid = GridType::Hundred;
-			m_grid.setRectangle(GridType::Hundred);
-			m_grid.setGrid(GridType::Hundred);
+			m_grid.SetRectangle(GridType::Hundred);
+			m_grid.SetGrid(GridType::Hundred);
 			m_enemies.clear();
 			for (int i = 0; i < 50; i++)
 			{
-				m_enemies.push_back(new Enemy(m_grid.getNodeSize().x, getEnemySpawn()));
+				m_enemies.push_back(new Enemy(m_grid.GetNodeSize().x, getEnemySpawn(), &m_grid, &m_player));
 			}
 			getEnemySpawn();
 			break;
 		case sf::Keyboard::Num3:
 			m_currentGrid = GridType::Thousand;
-			m_grid.setRectangle(GridType::Thousand);
-			m_grid.setGrid(GridType::Thousand);
+			m_grid.SetRectangle(GridType::Thousand);
+			m_grid.SetGrid(GridType::Thousand);
 			m_enemies.clear();
 			for (int i = 0; i < 500; i++)
 			{
-				m_enemies.push_back(new Enemy(m_grid.getNodeSize().x, getEnemySpawn()));
+				m_enemies.push_back(new Enemy(m_grid.GetNodeSize().x, getEnemySpawn(), &m_grid, &m_player));
 			}
 			break;
 		default:
@@ -88,16 +88,16 @@ void Game::processGameEvents(sf::Event& t_event)
 
 void Game::update(sf::Time t_dt)
 {
-	m_grid.update();
+	m_grid.Update();
 }
 
 void Game::render()
 {
 	m_window.clear();
-	m_grid.draw(m_window);
+	m_grid.Draw(m_window);
 	for (auto m_enemy : m_enemies)
 	{
-		m_enemy->render(m_window);
+		m_enemy->Render(m_window);
 	}
 	m_window.display();
 
@@ -109,13 +109,13 @@ sf::Vector2i Game::getEnemySpawn()
 	switch (m_currentGrid)
 	{
 	case GridType::Thirty:
-		t_position = sf::Vector2i((m_grid.getNodeSize().x * (rand() % 10 + 20)),(m_grid.getNodeSize().y * (rand() % 20 + 5)));
+		t_position = sf::Vector2i((m_grid.GetNodeSize().x * (rand() % 10 + 20)),(m_grid.GetNodeSize().y * (rand() % 20 + 5)));
 		break;
 	case GridType::Hundred:
-		t_position = sf::Vector2i((m_grid.getNodeSize().x * (rand() % 30 + 65)), (m_grid.getNodeSize().y * (rand() % 60 + 20)));
+		t_position = sf::Vector2i((m_grid.GetNodeSize().x * (rand() % 20 + 75)), (m_grid.GetNodeSize().y * (rand() % 60 + 20)));
 		break;
 	case GridType::Thousand:
-		t_position = sf::Vector2i((m_grid.getNodeSize().x * (rand() % 300 + 650)), (m_grid.getNodeSize().y * (rand() % 600 + 200)));
+		t_position = sf::Vector2i((m_grid.GetNodeSize().x * (rand() % 200 + 750)), (m_grid.GetNodeSize().y * (rand() % 600 + 200)));
 		break;
 	default:
 		break;
