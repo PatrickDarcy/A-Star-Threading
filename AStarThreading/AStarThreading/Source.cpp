@@ -1,3 +1,4 @@
+#pragma once
 
 #ifdef _DEBUG 
 #pragma comment(lib,"sfml-graphics-d.lib") 

@@ -7,10 +7,13 @@ class Player
 {
 private:
 	sf::RectangleShape m_player;
+	Node* m_playerNode;
 
 public:
-	Player();
+	Player() {};
+	Player(Node* t_playerNode);
 	~Player();
 	sf::Vector2f GetPlayerPos();
+	Node* GetPlayerNode();
 };
 

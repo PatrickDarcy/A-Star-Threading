@@ -49,37 +49,69 @@ void Game::processGameEvents(sf::Event& t_event)
 			m_window.close();
 			break;
 		case sf::Keyboard::Num1:
+		{
+			m_numEnemies = 5;
 			m_currentGrid = GridType::Thirty;
 			m_grid.SetRectangle(GridType::Thirty);
 			m_grid.SetGrid(GridType::Thirty);
-			m_enemies.clear();
-			for (int i = 0; i < 5; i++)
+			for (auto node : m_grid.GetNodes())
 			{
-				m_enemies.push_back(new Enemy(m_grid.GetNodeSize().x, getEnemySpawn(), &m_grid, &m_player));
+				m_grid.SetNeighbourNodes(node);
 			}
-			getEnemySpawn();
+			m_enemies.clear();
+			int randomPlayerNode1 = rand() % (10 - 0 + 1) + 10;
+			m_player = Player(m_grid.GetNodes()[randomPlayerNode1]);
+			for (int i = 0; i < m_numEnemies; i++)
+			{
+				int randomNode = rand() % (899 - 500 + 1) + 500;
+				m_enemies.push_back(new Enemy(m_grid.GetNodeSize().x, m_grid.GetNodes()[randomNode], &m_grid, &m_player));
+
+			}
+			SetUpAStar();
 			break;
+		}
 		case sf::Keyboard::Num2:
+		{
+			m_numEnemies = 50;
 			m_currentGrid = GridType::Hundred;
 			m_grid.SetRectangle(GridType::Hundred);
 			m_grid.SetGrid(GridType::Hundred);
-			m_enemies.clear();
-			for (int i = 0; i < 50; i++)
+			for (auto node : m_grid.GetNodes())
 			{
-				m_enemies.push_back(new Enemy(m_grid.GetNodeSize().x, getEnemySpawn(), &m_grid, &m_player));
+				m_grid.SetNeighbourNodes(node);
 			}
-			getEnemySpawn();
+			int randomPlayerNode2 = rand() % (10 - 0 + 1) + 10;
+			m_player = Player(m_grid.GetNodes()[randomPlayerNode2]);
+			m_enemies.clear();
+			for (int i = 0; i < m_numEnemies; i++)
+			{
+				int randomNode = rand() % (9999 - 9500 + 1) + 9500;
+				m_enemies.push_back(new Enemy(m_grid.GetNodeSize().x, m_grid.GetNodes()[randomNode], &m_grid, &m_player));
+			}
+			SetUpAStar();
 			break;
+		}
 		case sf::Keyboard::Num3:
+		{
+			m_numEnemies = 500;
 			m_currentGrid = GridType::Thousand;
 			m_grid.SetRectangle(GridType::Thousand);
 			m_grid.SetGrid(GridType::Thousand);
-			m_enemies.clear();
-			for (int i = 0; i < 500; i++)
+			for (auto node : m_grid.GetNodes())
 			{
-				m_enemies.push_back(new Enemy(m_grid.GetNodeSize().x, getEnemySpawn(), &m_grid, &m_player));
+				m_grid.SetNeighbourNodes(node);
 			}
+			int randomPlayerNode3 = rand() % (10 - 0 + 1) + 10;
+			m_player = Player(m_grid.GetNodes()[randomPlayerNode3]);
+			m_enemies.clear();
+			for (int i = 0; i < m_numEnemies; i++)
+			{
+				int randomNode = rand() % (999999 - 995000 + 1) + 995000;
+				m_enemies.push_back(new Enemy(m_grid.GetNodeSize().x, m_grid.GetNodes()[randomNode], &m_grid, &m_player));
+			}
+			SetUpAStar();
 			break;
+		}
 		default:
 			break;
 		}
@@ -89,6 +121,10 @@ void Game::processGameEvents(sf::Event& t_event)
 void Game::update(sf::Time t_dt)
 {
 	m_grid.Update();
+	for (auto enemy : m_enemies)
+	{
+		enemy->Update(t_dt);
+	}
 }
 
 void Game::render()
@@ -103,23 +139,12 @@ void Game::render()
 
 }
 
-sf::Vector2i Game::getEnemySpawn()
+void Game::SetUpAStar()
 {
-	sf::Vector2i t_position = sf::Vector2i(-1,-1);
-	switch (m_currentGrid)
+	for (int i = 0; i < m_numEnemies; i++)
 	{
-	case GridType::Thirty:
-		t_position = sf::Vector2i((m_grid.GetNodeSize().x * (rand() % 10 + 20)),(m_grid.GetNodeSize().y * (rand() % 20 + 5)));
-		break;
-	case GridType::Hundred:
-		t_position = sf::Vector2i((m_grid.GetNodeSize().x * (rand() % 20 + 75)), (m_grid.GetNodeSize().y * (rand() % 60 + 20)));
-		break;
-	case GridType::Thousand:
-		t_position = sf::Vector2i((m_grid.GetNodeSize().x * (rand() % 200 + 750)), (m_grid.GetNodeSize().y * (rand() % 600 + 200)));
-		break;
-	default:
-		break;
+		m_enemies[i]->SetPath(* AStar::GetPathAStar(m_enemies[i]->GetEnemyNode(), m_player.GetPlayerNode(), &m_grid));
 	}
-	return t_position;
+	int i = 0;
 }
 

@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AStar.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Grid.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="AStar.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Gloabls.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="NodeCostComparer.h" />

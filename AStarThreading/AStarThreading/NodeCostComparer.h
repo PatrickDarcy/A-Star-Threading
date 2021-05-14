@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Node.h"
 
 template <class NodeType, class ArcType> class GraphNode;
 
@@ -15,4 +15,3 @@ public:
 		return n1->m_data.m_pathCost + n1->m_data.m_heuristic > n2->m_data.m_pathCost + n2->m_data.m_heuristic;
 	};
 };
-#include "Node.h"

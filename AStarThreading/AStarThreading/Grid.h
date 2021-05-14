@@ -1,8 +1,7 @@
 #pragma once
 #include "Node.h"
 #include "SFML/Graphics.hpp"
-
-class Grid;
+#include "Gloabls.h"
 
 enum GridType {
 	Thirty,
@@ -15,7 +14,7 @@ class Grid
 private:
 	sf::RectangleShape m_node;
 	std::vector<Node*> m_grid;
-	float m_gridDimensions;
+	int m_gridDimensions;
 	float m_distNode = 5.5f;
 
 public:
@@ -25,8 +24,8 @@ public:
 	void SetGrid(GridType t_gridType);
 	void Update();
 	void Draw(sf::RenderWindow& t_window);
+	void SetNeighbourNodes(Node* t_current);
 	float GetGridDimensions();
 	sf::Vector2f GetNodeSize();
 	std::vector<Node*> GetNodes();
 };
-

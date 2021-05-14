@@ -2,12 +2,8 @@
 #include <iostream>
 #include "ThreadPool.h"
 #include "SFML/Graphics.hpp"
-#include "Grid.h"
 #include "Enemy.h"
-#include "Node.h"
-
-const int static SCREEN_WIDTH = 1000;
-const int static SCREEN_HEIGHT = 1000;
+#include "AStar.h"
 
 class Game
 {
@@ -19,6 +15,7 @@ private:
 	GridType m_currentGrid;
 	std::vector<Enemy*> m_enemies;
 	Player m_player;
+	float m_numEnemies;
 
 public:
 
@@ -29,4 +26,5 @@ public:
 	void processGameEvents(sf::Event& t_event);
 	void render();
 	sf::Vector2i getEnemySpawn();
+	void SetUpAStar();
 };
