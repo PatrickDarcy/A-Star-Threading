@@ -64,8 +64,7 @@ void Game::processGameEvents(sf::Event& t_event)
 			for (int i = 0; i < m_numEnemies; i++)
 			{
 				int randomNode = rand() % (899 - 500 + 1) + 500;
-				m_enemies.push_back(new Enemy(m_grid.GetNodeSize().x, m_grid.GetNodes()[randomNode], &m_grid, &m_player));
-
+				m_enemies.push_back(new Enemy(m_grid.GetNodeSize().x, m_grid.GetNodes()[randomNode], &m_player));
 			}
 			SetUpAStar();
 			break;
@@ -86,7 +85,7 @@ void Game::processGameEvents(sf::Event& t_event)
 			for (int i = 0; i < m_numEnemies; i++)
 			{
 				int randomNode = rand() % (9999 - 9500 + 1) + 9500;
-				m_enemies.push_back(new Enemy(m_grid.GetNodeSize().x, m_grid.GetNodes()[randomNode], &m_grid, &m_player));
+				m_enemies.push_back(new Enemy(m_grid.GetNodeSize().x, m_grid.GetNodes()[randomNode], &m_player));
 			}
 			SetUpAStar();
 			break;
@@ -107,7 +106,7 @@ void Game::processGameEvents(sf::Event& t_event)
 			for (int i = 0; i < m_numEnemies; i++)
 			{
 				int randomNode = rand() % (999999 - 995000 + 1) + 995000;
-				m_enemies.push_back(new Enemy(m_grid.GetNodeSize().x, m_grid.GetNodes()[randomNode], &m_grid, &m_player));
+				m_enemies.push_back(new Enemy(m_grid.GetNodeSize().x, m_grid.GetNodes()[randomNode], &m_player));
 			}
 			SetUpAStar();
 			break;
@@ -125,6 +124,7 @@ void Game::update(sf::Time t_dt)
 	{
 		enemy->Update(t_dt);
 	}
+	int x = 0;
 }
 
 void Game::render()
@@ -143,8 +143,8 @@ void Game::SetUpAStar()
 {
 	for (int i = 0; i < m_numEnemies; i++)
 	{
-		m_enemies[i]->SetPath(* AStar::GetPathAStar(m_enemies[i]->GetEnemyNode(), m_player.GetPlayerNode(), &m_grid));
+		m_enemies[i]->SetPath(*AStar::GetPathAStar( m_player.GetPlayerNode(), m_enemies[i]->GetEnemyNode(), &m_grid, &m_enemies[i]->m_path));
+		//m_thread.addTask(bind(&AStar::GetPathAStar, m_player.GetPlayerNode(), m_enemies[i]->GetEnemyNode(), &m_grid, &m_enemies[i]->m_path));
 	}
-	int i = 0;
 }
 

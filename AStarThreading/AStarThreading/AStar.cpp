@@ -1,11 +1,14 @@
 #include "AStar.h"
 
-std::vector<Node*>* AStar::GetPathAStar(Node* t_startPos, Node* t_endPos, Grid* t_grid)
+//std::mutex AStar::s_lock;
+
+std::vector<Node*>* AStar::GetPathAStar(Node* t_startPos, Node* t_endPos, Grid* t_grid, std::vector<Node*>* t_path)
 {
+    //s_lock.lock();
     Node* startNode = t_startPos;
     Node* endNode = t_endPos;
 
-    std::priority_queue<Node*, std::vector<Node*>, pq>* m_openList = new std::priority_queue<Node*, std::vector<Node*>, pq>(); // change to priority queue
+    std::priority_queue<Node*, std::vector<Node*>, pq>* m_openList = new std::priority_queue<Node*, std::vector<Node*>, pq>();
     std::vector<Node*>* m_closedList = new std::vector<Node*>;
 
     for (auto t_nodes : t_grid->GetNodes())
@@ -21,20 +24,17 @@ std::vector<Node*>* AStar::GetPathAStar(Node* t_startPos, Node* t_endPos, Grid* 
 
     while (m_openList->size() > 0)
     {
-        Node* currentNode = m_openList->top();//lowestPathNode(m_openList);
+        Node* currentNode = m_openList->top();
 
         if (currentNode == endNode)
         {
-            return CalPath(endNode);
+            return CalPath(endNode, t_path);
+            //s_lock.unlock();
         }
 
-        //m_openList->erase(std::remove_if(m_openList->begin(), m_openList->end(), [&](Node* node)->bool {return node == currentNode; }), m_openList->end());
         m_openList->pop();
         m_closedList->push_back(currentNode);
-        
-        std::cout << currentNode->m_index << std::endl;
-        if (currentNode->m_index == 14)
-            int x = 0;
+
         for (Node* node : *currentNode->m_neighbours)
         {
 
@@ -58,8 +58,8 @@ std::vector<Node*>* AStar::GetPathAStar(Node* t_startPos, Node* t_endPos, Grid* 
             }
         }
     }
-
-    return NULL;
+    return nullptr;
+    //s_lock.unlock();
 }
 
 float AStar::HeuristicCalc(sf::Vector2f t_startNode, sf::Vector2f t_endNode)
@@ -67,7 +67,7 @@ float AStar::HeuristicCalc(sf::Vector2f t_startNode, sf::Vector2f t_endNode)
     return sqrt(pow(t_startNode.x - t_endNode.x, 2) + pow(t_startNode.y - t_endNode.y, 2));
 }
 
-std::vector<Node*>* AStar::CalPath(Node* t_goalNode)
+std::vector<Node*>* AStar::CalPath(Node* t_goalNode, std::vector<Node*>* t_path)
 {
     Node* current = t_goalNode->m_previous;
     std::vector<Node*>* m_path = new std::vector<Node*>;
@@ -77,4 +77,5 @@ std::vector<Node*>* AStar::CalPath(Node* t_goalNode)
         current = current->m_previous;
     }
     return m_path;
+    t_path = m_path;
 }
